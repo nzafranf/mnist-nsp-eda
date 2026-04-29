@@ -78,52 +78,62 @@ class UNet(nn.Module):
         t = t.view(-1, 1)
         if t.numel() == 1:
             t = t.expand(x.shape[0], -1)
-        t1 = self.time_mlp1(t)        # Shape: [batch, c]
-        t2 = self.time_mlp2(t)        # Shape: [batch, 2c]
-        t3 = self.time_mlp3(t)        # Shape: [batch, 4c]
-        
+        t1 = self.time_mlp1(t)
+        t2 = self.time_mlp2(t)
+        t3 = self.time_mlp3(t)
+
         # Encoder
-        conv1 = self.conv1(x)                 # Shape: [batch, c, H, W]
-        pool1 = self.pool1(conv1)             # Shape: [batch, c, H/2, W/2]
-        
-        conv2 = self.conv2(pool1)             # Shape: [batch, 2c, H/2, W/2]
-        pool2 = self.pool2(conv2)             # Shape: [batch, 2c, H/4, W/4]
-        
-        conv3 = self.conv3(pool2)             # Shape: [batch, 4c, H/4, W/4]
-        pool3 = self.pool3(conv3)             # Shape: [batch, 4c, H/8, W/8]
-        
-        conv4 = self.conv4(pool3)             # Shape: [batch, 8c, H/8, W/8]
-        
-        # Helper function for padding
-        def pad_if_needed(upsampled, skip):
-            if (upsampled.shape[-1] + 1) == skip.shape[-1]:
-                return F.pad(upsampled, (0, 1, 0, 1), mode='replicate')
-            return upsampled
-        # Decoder Step 1
-        up3 = self.upconv3(conv4)              # Shape: [batch, 4c, H/4, W/4]
-        up3 = pad_if_needed(up3, conv3)        # Ensure up3 matches conv3 dimensions
-        # Reshape t3 to [batch, 4c, H/4, W/4]
-        t_emb3 = t3.unsqueeze(-1).unsqueeze(-1).repeat(1, 1, up3.size(2), up3.size(3))  
-        # Alternatively, use expand to save memory:
-        # t_emb3 = t3.unsqueeze(-1).unsqueeze(-1).expand(-1, -1, up3.size(2), up3.size(3))
-        concat3 = torch.cat([up3, conv3, t_emb3], dim=1)   # Shape: [batch, 12c, H/4, W/4]
-        conv5 = self.conv5(concat3)            # Shape: [batch, 4c, H/4, W/4]
+        conv1 = self.conv1(x)
+        pool1 = self.pool1(conv1)
 
-        # Decoder Step 2
-        up2 = self.upconv2(conv5)              # Shape: [batch, 2c, H/2, W/2]
-        up2 = pad_if_needed(up2, conv2)        # Ensure up2 matches conv2 dimensions
-        # Reshape t2 to [batch, 2c, H/2, W/2]
-        t_emb2 = t2.unsqueeze(-1).unsqueeze(-1).repeat(1, 1, up2.size(2), up2.size(3))
-        concat2 = torch.cat([up2, conv2, t_emb2], dim=1)   # Shape: [batch, 6c, H/2, W/2]
-        conv6 = self.conv6(concat2)            # Shape: [batch, 2c, H/2, W/2]
+        conv2 = self.conv2(pool1)
+        pool2 = self.pool2(conv2)
 
-        # Decoder Step 3
-        up1 = self.upconv1(conv6)              # Shape: [batch, c, H, W]
-        up1 = pad_if_needed(up1, conv1)        # Ensure up1 matches conv1 dimensions
-        # Reshape t1 to [batch, c, H, W]
-        t_emb1 = t1.unsqueeze(-1).unsqueeze(-1).repeat(1, 1, up1.size(2), up1.size(3))
-        concat1 = torch.cat([up1, conv1, t_emb1], dim=1)   # Shape: [batch, 3c, H, W]
-        conv7 = self.conv7(concat1)            # Shape: [batch, c, H, W]
+        conv3 = self.conv3(pool2)
+        pool3 = self.pool3(conv3)
 
-        # Final Convolution
-        return self.final_conv(conv7)          # Shape: [batch, out_channels, H, W]
+        conv4 = self.conv4(pool3)
+
+        # Decoder with proper dimension handling
+        # Step 1
+        up3 = self.upconv3(conv4)
+
+        # Ensure x is 4D (it should be [batch, channels, height, width])
+        if x.dim() != 4:
+            raise ValueError(f"Expected x to be 4D, got shape {x.shape}")
+
+        # Pad if needed to match spatial dimensions
+        if up3.shape[-2:] != conv3.shape[-2:]:
+            pad_h = max(0, conv3.size(-2) - up3.size(-2))
+            pad_w = max(0, conv3.size(-1) - up3.size(-1))
+            up3 = F.pad(up3, (0, pad_w, 0, pad_h), mode='replicate')
+
+        # Reshape time embedding
+        t_emb3 = t3.view(t3.size(0), t3.size(1), 1, 1)
+        t_emb3 = t_emb3.expand(-1, -1, up3.size(2), up3.size(3))
+        concat3 = torch.cat([up3, conv3, t_emb3], dim=1)
+        conv5 = self.conv5(concat3)
+
+        # Step 2
+        up2 = self.upconv2(conv5)
+        if up2.shape[-2:] != conv2.shape[-2:]:
+            pad_h = max(0, conv2.size(-2) - up2.size(-2))
+            pad_w = max(0, conv2.size(-1) - up2.size(-1))
+            up2 = F.pad(up2, (0, pad_w, 0, pad_h), mode='replicate')
+        t_emb2 = t2.view(t2.size(0), t2.size(1), 1, 1)
+        t_emb2 = t_emb2.expand(-1, -1, up2.size(2), up2.size(3))
+        concat2 = torch.cat([up2, conv2, t_emb2], dim=1)
+        conv6 = self.conv6(concat2)
+
+        # Step 3
+        up1 = self.upconv1(conv6)
+        if up1.shape[-2:] != conv1.shape[-2:]:
+            pad_h = max(0, conv1.size(-2) - up1.size(-2))
+            pad_w = max(0, conv1.size(-1) - up1.size(-1))
+            up1 = F.pad(up1, (0, pad_w, 0, pad_h), mode='replicate')
+        t_emb1 = t1.view(t1.size(0), t1.size(1), 1, 1)
+        t_emb1 = t_emb1.expand(-1, -1, up1.size(2), up1.size(3))
+        concat1 = torch.cat([up1, conv1, t_emb1], dim=1)
+        conv7 = self.conv7(concat1)
+
+        return self.final_conv(conv7)

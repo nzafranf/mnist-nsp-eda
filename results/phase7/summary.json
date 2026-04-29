@@ -1,0 +1,138 @@
+{
+  "features": [
+    {
+      "mean_curvature": 0.5137152075767517,
+      "max_curvature": 2.8269269466400146,
+      "curvature_std": 0.473081111907959,
+      "mean_alignment": 0.979577342132194,
+      "alignment_std": 0.05001142525843581,
+      "straightness": 0.9693626541088942,
+      "mean_leap_size": 14.353535353535353,
+      "phase_transition_idx": 48,
+      "complexity": 0.48,
+      "traj_idx": 0
+    },
+    {
+      "mean_curvature": 0.47191447019577026,
+      "max_curvature": 2.6101319789886475,
+      "curvature_std": 0.4383602440357208,
+      "mean_alignment": 0.9811571433237941,
+      "alignment_std": 0.04966175450767758,
+      "straightness": 0.9728020687330555,
+      "mean_leap_size": 14.94949494949495,
+      "phase_transition_idx": 64,
+      "complexity": 0.64,
+      "traj_idx": 1
+    },
+    {
+      "mean_curvature": 0.46024489402770996,
+      "max_curvature": 2.9266176223754883,
+      "curvature_std": 0.4904300272464752,
+      "mean_alignment": 0.9861998892154443,
+      "alignment_std": 0.04944798673537996,
+      "straightness": 0.9826718077597197,
+      "mean_leap_size": 15.646464646464647,
+      "phase_transition_idx": 52,
+      "complexity": 0.52,
+      "traj_idx": 2
+    },
+    {
+      "mean_curvature": 0.4766281545162201,
+      "max_curvature": 2.8091471195220947,
+      "curvature_std": 0.5007306933403015,
+      "mean_alignment": 0.9834789791701152,
+      "alignment_std": 0.04929185460892789,
+      "straightness": 0.9773406389204385,
+      "mean_leap_size": 15.404040404040405,
+      "phase_transition_idx": 69,
+      "complexity": 0.69,
+      "traj_idx": 3
+    },
+    {
+      "mean_curvature": 0.5233205556869507,
+      "max_curvature": 2.5103793144226074,
+      "curvature_std": 0.4153267741203308,
+      "mean_alignment": 0.9781476663070647,
+      "alignment_std": 0.0507109700382261,
+      "straightness": 0.9664686862330181,
+      "mean_leap_size": 14.030303030303031,
+      "phase_transition_idx": 0,
+      "complexity": 0.0,
+      "traj_idx": 4
+    },
+    {
+      "mean_curvature": 0.5131909847259521,
+      "max_curvature": 2.4350826740264893,
+      "curvature_std": 0.40077322721481323,
+      "mean_alignment": 0.9792534345666329,
+      "alignment_std": 0.04997987540492398,
+      "straightness": 0.9693043794199483,
+      "mean_leap_size": 14.11111111111111,
+      "phase_transition_idx": 57,
+      "complexity": 0.57,
+      "traj_idx": 5
+    },
+    {
+      "mean_curvature": 0.4677647054195404,
+      "max_curvature": 3.0955066680908203,
+      "curvature_std": 0.5242707133293152,
+      "mean_alignment": 0.985666108711183,
+      "alignment_std": 0.04932063053477083,
+      "straightness": 0.9816689977155946,
+      "mean_leap_size": 15.565656565656566,
+      "phase_transition_idx": 61,
+      "complexity": 0.61,
+      "traj_idx": 6
+    },
+    {
+      "mean_curvature": 0.4964286684989929,
+      "max_curvature": 2.588899612426758,
+      "curvature_std": 0.4212365746498108,
+      "mean_alignment": 0.9800257476626197,
+      "alignment_std": 0.04979607905651098,
+      "straightness": 0.9703484115534105,
+      "mean_leap_size": 14.464646464646465,
+      "phase_transition_idx": 66,
+      "complexity": 0.66,
+      "traj_idx": 7
+    },
+    {
+      "mean_curvature": 0.4928346276283264,
+      "max_curvature": 2.7761921882629395,
+      "curvature_std": 0.4918302595615387,
+      "mean_alignment": 0.9831201189576538,
+      "alignment_std": 0.04982365357630966,
+      "straightness": 0.9767547585329397,
+      "mean_leap_size": 15.252525252525253,
+      "phase_transition_idx": 56,
+      "complexity": 0.56,
+      "traj_idx": 8
+    },
+    {
+      "mean_curvature": 0.48811662197113037,
+      "max_curvature": 3.0946452617645264,
+      "curvature_std": 0.5385740399360657,
+      "mean_alignment": 0.9834116036313441,
+      "alignment_std": 0.04914179129026048,
+      "straightness": 0.9770723172648798,
+      "mean_leap_size": 15.373737373737374,
+      "phase_transition_idx": 64,
+      "complexity": 0.64,
+      "traj_idx": 9
+    }
+  ],
+  "clusters": {
+    "cluster_0": {
+      "count": 5,
+      "mean_straightness": 0.9696572400096652,
+      "mean_leap_size": 14.381818181818181,
+      "mean_complexity": 0.47000000000000003
+    },
+    "cluster_1": {
+      "count": 5,
+      "mean_straightness": 0.9791017040387144,
+      "mean_leap_size": 15.44848484848485,
+      "mean_complexity": 0.604
+    }
+  }
+}

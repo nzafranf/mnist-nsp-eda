@@ -1,0 +1,39 @@
+{
+  "trajectories": [
+    {
+      "idx": 0,
+      "phase_transition_idx": 48,
+      "phase_transition_ratio": 0.48,
+      "max_velocity_magnitude": 37.626304626464844,
+      "mean_velocity_magnitude": 36.70851135253906
+    },
+    {
+      "idx": 1,
+      "phase_transition_idx": 64,
+      "phase_transition_ratio": 0.64,
+      "max_velocity_magnitude": 36.78471374511719,
+      "mean_velocity_magnitude": 35.644920349121094
+    },
+    {
+      "idx": 2,
+      "phase_transition_idx": 52,
+      "phase_transition_ratio": 0.52,
+      "max_velocity_magnitude": 38.168052673339844,
+      "mean_velocity_magnitude": 37.324893951416016
+    },
+    {
+      "idx": 3,
+      "phase_transition_idx": 69,
+      "phase_transition_ratio": 0.69,
+      "max_velocity_magnitude": 37.53480911254883,
+      "mean_velocity_magnitude": 35.96168518066406
+    },
+    {
+      "idx": 4,
+      "phase_transition_idx": 0,
+      "phase_transition_ratio": 0.0,
+      "max_velocity_magnitude": 36.71895217895508,
+      "mean_velocity_magnitude": 36.007225036621094
+    }
+  ]
+}

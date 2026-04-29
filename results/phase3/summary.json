@@ -1,0 +1,79 @@
+{
+  "individual_trajectories": [
+    {
+      "idx": 0,
+      "mean_curvature": 0.5137152075767517,
+      "max_curvature": 2.8269269466400146,
+      "mean_alignment": 0.979577342132194,
+      "straightness": 0.9693626541088942
+    },
+    {
+      "idx": 1,
+      "mean_curvature": 0.47191447019577026,
+      "max_curvature": 2.6101319789886475,
+      "mean_alignment": 0.9811571433237941,
+      "straightness": 0.9728020687330555
+    },
+    {
+      "idx": 2,
+      "mean_curvature": 0.46024489402770996,
+      "max_curvature": 2.9266176223754883,
+      "mean_alignment": 0.9861998892154443,
+      "straightness": 0.9826718077597197
+    },
+    {
+      "idx": 3,
+      "mean_curvature": 0.4766281545162201,
+      "max_curvature": 2.8091471195220947,
+      "mean_alignment": 0.9834789791701152,
+      "straightness": 0.9773406389204385
+    },
+    {
+      "idx": 4,
+      "mean_curvature": 0.5233205556869507,
+      "max_curvature": 2.5103793144226074,
+      "mean_alignment": 0.9781476663070647,
+      "straightness": 0.9664686862330181
+    },
+    {
+      "idx": 5,
+      "mean_curvature": 0.5131909847259521,
+      "max_curvature": 2.4350826740264893,
+      "mean_alignment": 0.9792534345666329,
+      "straightness": 0.9693043794199483
+    },
+    {
+      "idx": 6,
+      "mean_curvature": 0.4677647054195404,
+      "max_curvature": 3.0955066680908203,
+      "mean_alignment": 0.985666108711183,
+      "straightness": 0.9816689977155946
+    },
+    {
+      "idx": 7,
+      "mean_curvature": 0.4964286684989929,
+      "max_curvature": 2.588899612426758,
+      "mean_alignment": 0.9800257476626197,
+      "straightness": 0.9703484115534105
+    },
+    {
+      "idx": 8,
+      "mean_curvature": 0.4928346276283264,
+      "max_curvature": 2.7761921882629395,
+      "mean_alignment": 0.9831201189576538,
+      "straightness": 0.9767547585329397
+    },
+    {
+      "idx": 9,
+      "mean_curvature": 0.48811662197113037,
+      "max_curvature": 3.0946452617645264,
+      "mean_alignment": 0.9834116036313441,
+      "straightness": 0.9770723172648798
+    }
+  ],
+  "correlations": {
+    "curvature_alignment_corr": -0.352359683892253,
+    "p_value": 1.3270516919799985e-30,
+    "interpretation": "Moderate"
+  }
+}

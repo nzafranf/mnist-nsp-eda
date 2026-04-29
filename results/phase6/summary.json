@@ -1,0 +1,41 @@
+{
+  "trajectories": [
+    {
+      "idx": 0,
+      "greedy_steps": 12,
+      "uniform_k8_steps": 8,
+      "speedup": 0.6666666666666666
+    },
+    {
+      "idx": 1,
+      "greedy_steps": 12,
+      "uniform_k8_steps": 8,
+      "speedup": 0.6666666666666666
+    },
+    {
+      "idx": 2,
+      "greedy_steps": 12,
+      "uniform_k8_steps": 8,
+      "speedup": 0.6666666666666666
+    },
+    {
+      "idx": 3,
+      "greedy_steps": 12,
+      "uniform_k8_steps": 8,
+      "speedup": 0.6666666666666666
+    },
+    {
+      "idx": 4,
+      "greedy_steps": 12,
+      "uniform_k8_steps": 8,
+      "speedup": 0.6666666666666666
+    }
+  ],
+  "speedups": [
+    0.6666666666666666,
+    0.6666666666666666,
+    0.6666666666666666,
+    0.6666666666666666,
+    0.6666666666666666
+  ]
+}

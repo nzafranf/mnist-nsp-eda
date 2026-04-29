@@ -1,0 +1,61 @@
+{
+  "schedules": {
+    "uniform_K4_traj0": {
+      "type": "uniform",
+      "K": 4,
+      "steps": 4
+    },
+    "uniform_K8_traj0": {
+      "type": "uniform",
+      "K": 8,
+      "steps": 8
+    },
+    "uniform_K16_traj0": {
+      "type": "uniform",
+      "K": 16,
+      "steps": 16
+    },
+    "greedy_traj0": {
+      "type": "greedy",
+      "steps": 12
+    },
+    "uniform_K4_traj1": {
+      "type": "uniform",
+      "K": 4,
+      "steps": 4
+    },
+    "uniform_K8_traj1": {
+      "type": "uniform",
+      "K": 8,
+      "steps": 8
+    },
+    "uniform_K16_traj1": {
+      "type": "uniform",
+      "K": 16,
+      "steps": 16
+    },
+    "greedy_traj1": {
+      "type": "greedy",
+      "steps": 12
+    },
+    "uniform_K4_traj2": {
+      "type": "uniform",
+      "K": 4,
+      "steps": 4
+    },
+    "uniform_K8_traj2": {
+      "type": "uniform",
+      "K": 8,
+      "steps": 8
+    },
+    "uniform_K16_traj2": {
+      "type": "uniform",
+      "K": 16,
+      "steps": 16
+    },
+    "greedy_traj2": {
+      "type": "greedy",
+      "steps": 12
+    }
+  }
+}

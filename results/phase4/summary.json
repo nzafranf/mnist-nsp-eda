@@ -1,0 +1,34 @@
+{
+  "trajectories": [
+    {
+      "idx": 0,
+      "mean_leap_size": 14.353535353535353,
+      "max_leap_size": 18.0,
+      "leap_sizes_std": 3.38837326159047
+    },
+    {
+      "idx": 1,
+      "mean_leap_size": 14.94949494949495,
+      "max_leap_size": 17.0,
+      "leap_sizes_std": 3.494219576957735
+    },
+    {
+      "idx": 2,
+      "mean_leap_size": 15.646464646464647,
+      "max_leap_size": 20.0,
+      "leap_sizes_std": 4.035982429092333
+    },
+    {
+      "idx": 3,
+      "mean_leap_size": 15.404040404040405,
+      "max_leap_size": 20.0,
+      "leap_sizes_std": 3.8818905940567285
+    },
+    {
+      "idx": 4,
+      "mean_leap_size": 14.030303030303031,
+      "max_leap_size": 18.0,
+      "leap_sizes_std": 3.661027469221565
+    }
+  ]
+}

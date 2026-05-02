@@ -11,17 +11,12 @@ echo "Downloading PRIMARY artifacts (best model)"
 echo "==========================================="
 echo ""
 
-# PRIMARY folder ID - Replace with actual Google Drive folder ID
-PRIMARY_FOLDER_ID="YOUR_PRIMARY_FOLDER_ID"
+# PRIMARY folder ID
+PRIMARY_FOLDER_ID="1tT1cAT-PVAz9TkFhSYbFUCslKJ0x73lI"
 
 if [ "$PRIMARY_FOLDER_ID" = "YOUR_PRIMARY_FOLDER_ID" ]; then
     echo "ERROR: PRIMARY_FOLDER_ID not set!"
     echo "Please update this script with the actual Google Drive folder ID"
-    echo ""
-    echo "Steps to get folder ID:"
-    echo "1. Open folder on Google Drive"
-    echo "2. Copy URL: https://drive.google.com/drive/folders/FOLDER_ID_HERE"
-    echo "3. Replace PRIMARY_FOLDER_ID with the ID from the URL"
     exit 1
 fi
 

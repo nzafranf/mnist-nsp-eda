@@ -20,17 +20,12 @@ echo "Time: 10-30 minutes depending on connection"
 echo "==========================================="
 echo ""
 
-# SECONDARY folder ID - Replace with actual Google Drive folder ID
-SECONDARY_FOLDER_ID="YOUR_SECONDARY_FOLDER_ID"
+# SECONDARY folder ID
+SECONDARY_FOLDER_ID="1Er-etthLRmheD3HsFWfCbxnHtAZSYyqz"
 
 if [ "$SECONDARY_FOLDER_ID" = "YOUR_SECONDARY_FOLDER_ID" ]; then
     echo "ERROR: SECONDARY_FOLDER_ID not set!"
     echo "Please update this script with the actual Google Drive folder ID"
-    echo ""
-    echo "Steps to get folder ID:"
-    echo "1. Open folder on Google Drive"
-    echo "2. Copy URL: https://drive.google.com/drive/folders/FOLDER_ID_HERE"
-    echo "3. Replace SECONDARY_FOLDER_ID with the ID from the URL"
     exit 1
 fi
 

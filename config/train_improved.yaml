@@ -1,0 +1,41 @@
+defaults:
+  - model: flow_matching_improved
+  - _self_
+
+
+# Data configuration
+data:
+  data_dir: ${hydra:runtime.cwd}/data
+  batch_size: 64  # Increased from 32
+
+# Training configuration - MUCH LONGER for CONVERGENCE
+training:
+  max_epochs: 150  # Increased from 10 - aim for convergence to near 0 loss
+  devices: 1
+  accelerator: auto
+  limit_val_batches: 0.05  # Reduced validation overhead
+
+# Checkpoint configuration
+checkpoint:
+  monitor: train_loss
+  filename: fm-improved-{epoch:03d}-{train_loss:.4f}
+  save_top_k: 5  # Save top 5 models
+  mode: min
+
+# Early stopping configuration
+early_stopping:
+  enabled: true  # ENABLE to stop when not improving
+  patience: 15  # Stop if no improvement for 15 epochs
+  monitor: train_loss
+
+
+validate_only: false
+checkpoint_path: null
+
+# Output configuration
+hydra:
+  run:
+    dir: outputs/${file_name:${model._target_}}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  job:
+    chdir: true
+  verbose: false

@@ -1,0 +1,41 @@
+defaults:
+  - model: flow_matching_improved
+  - _self_
+
+
+# Data configuration
+data:
+  data_dir: ${hydra:runtime.cwd}/data
+  batch_size: 64
+
+# Training configuration - BALANCED for 8 hours on CPU
+training:
+  max_epochs: 24  # ~8 hours on CPU (at ~20 min per epoch)
+  devices: 1
+  accelerator: auto
+  limit_val_batches: 0.05
+
+# Checkpoint configuration - FREQUENT SAVES
+checkpoint:
+  monitor: train_loss
+  filename: fm-balanced-{epoch:03d}-{train_loss:.4f}
+  save_top_k: 12  # Keep 12 best checkpoints (not just 5)
+  mode: min
+
+# Early stopping - tighter for fewer epochs
+early_stopping:
+  enabled: true
+  patience: 5  # Stop if no improvement for 5 epochs (vs 15 before)
+  monitor: train_loss
+
+
+validate_only: false
+checkpoint_path: null
+
+# Output configuration
+hydra:
+  run:
+    dir: outputs/${file_name:${model._target_}}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  job:
+    chdir: true
+  verbose: false

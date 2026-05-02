@@ -1,0 +1,3 @@
+_target_: models.fm.ImageFlowMatcher
+lr: 1e-3  # Increased from 1e-4 for faster convergence
+c_unet: 64  # Doubled from 32 for larger model capacity

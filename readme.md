@@ -1,169 +1,145 @@
-# Flow Matching for MNIST
-![flow matching](https://github.com/user-attachments/assets/78d56f06-29e7-461c-9f9d-0d024549f853)
+# Flow Matching on MNIST
 
-![photo_2025-09-19_17-21-11](https://github.com/user-attachments/assets/28dbab1e-33d3-439b-bc0e-0b0f14c1d6bd)
+A complete implementation of Flow Matching for generative modeling, with trajectory visualization and LDA-based analysis.
 
+**Status:** ✓ Training Complete | Best Loss: 0.1829 | Duration: ~5.2 hours (CPU)
 
-This project implements a flow matching model for image generation using PyTorch Lightning. The model is trained on the MNIST dataset and can generate new images using a learned flow.
+## Quick Start (2 minutes)
 
-[Flow Matching comprehensive guide](https://arxiv.org/abs/2412.06264)
-
-[Flow Matching python library by Meta](https://github.com/facebookresearch/flow_matching)
-
-[Flow Matching original paper](https://arxiv.org/abs/2210.02747)
-
-## Installation
-
-### Option 1: Direct Installation
 ```bash
+# 1. Clone repository
+git clone <repo-url>
+cd flow-matching-mnist
+
+# 2. Download best model
+bash scripts/download_primary.sh
+
+# 3. Install dependencies
 pip install -r requirements.txt
+
+# 4. Generate samples
+python visualizations/training/generate_samples.py
 ```
 
-### Option 2: Setup with Justfile (Recommended)
-This project includes a `Justfile` for easy environment management using conda:
+Results will be saved in `results/` directory.
+
+---
+
+## Features
+
+- **Trained Model:** Best checkpoint with loss 0.1829
+- **Sample Quality:** High-fidelity MNIST digit generation
+- **Trajectory Analysis:** LDA-based 3D visualization and frame sequences
+- **Comprehensive Docs:** Full architecture, training, and inference guides
+
+---
+
+## Documentation
+
+| Document | Purpose |
+|----------|---------|
+| [INFERENCE_GUIDE.md](docs/10_INFERENCE_GUIDE.md) | How to generate samples and customize inference |
+| [DEPLOYMENT_STRUCTURE.md](docs/09_DEPLOYMENT_STRUCTURE.md) | Google Drive folder organization |
+| [VISUALIZATIONS_GUIDE.md](docs/VISUALIZATIONS_GUIDE.md) | All available visualizations and how to run them |
+| [00_README.md](docs/00_README.md) | Full project overview and results |
+| [01_ARCHITECTURE.md](docs/01_ARCHITECTURE.md) | Model architecture details |
+
+---
+
+## Available Visualizations
+
+After downloading, generate:
 
 ```bash
-# Create and setup conda environment
-just setup-env
+# Sample quality grid (1 min)
+python visualizations/training/generate_samples.py
 
-# Run Python commands in the environment
-just python train.py
+# Training analysis charts (1 min)
+python visualizations/training/analyze_training.py
 
-# Remove environment (if needed)
-just remove-env
+# Interactive 3D visualization (5 min)
+python visualizations/lda/quick_3d_interactive.py
+
+# Trajectory frame sequences (30-40 min)
+python visualizations/lda/lda_frame_sequence.py
 ```
 
-The Justfile creates a conda environment named `mnist-flow-matching` with Python 3.13 and installs all dependencies.
+See [VISUALIZATIONS_GUIDE.md](docs/VISUALIZATIONS_GUIDE.md) for detailed information.
 
-## Jupyter Notebook
-
-The project includes a Jupyter notebook (`flow-matching-with-mnist-dataset.ipynb`) that demonstrates the flow matching process and provides the complete workflow of the training on kaggle
-
-## Training
-
-To train the model, run:
-
-**With Justfile:**
-```bash
-just python train.py
-```
-
-**Without Justfile:**
-```bash
-python train.py
-```
-
-### Configuration
-
-The training is configured using Hydra with YAML configuration files located in the `config/` directory. You can override any configuration parameter:
-
-```bash
-# Override data configuration
-just python train.py data.batch_size=64 training.max_epochs=20
-
-# Enable early stopping
-just python train.py early_stopping.enabled=true early_stopping.patience=5
-
-# Use different devices
-just python train.py training.devices=2 training.accelerator=gpu
-
-# Validate only mode
-just python train.py validate_only=true checkpoint_path=path/to/checkpoint.ckpt
-```
-
-Key configuration options (from `config/train.yaml`):
-
-**Data Configuration:**
-- `data.data_dir`: Directory to store the datasets (default: `data`)
-- `data.batch_size`: Batch size for training and testing (default: 32)
-
-**Training Configuration:**
-- `training.max_epochs`: Maximum number of training epochs (default: 10)
-- `training.devices`: Number of devices to use (default: 1)
-- `training.accelerator`: Accelerator type (default: auto)
-- `training.limit_val_batches`: Fraction of validation batches (default: 0.1)
-
-**Checkpoint Configuration:**
-- `checkpoint.monitor`: Metric to monitor for checkpointing (default: train_loss)
-- `checkpoint.filename`: Checkpoint filename pattern
-- `checkpoint.save_top_k`: Number of top checkpoints to save (default: 3)
-- `checkpoint.mode`: Monitoring mode (default: min)
-
-**Early Stopping Configuration:**
-- `early_stopping.enabled`: Enable early stopping (default: false)
-- `early_stopping.patience`: Early stopping patience (default: 3)
-- `early_stopping.monitor`: Metric to monitor for early stopping (default: train_loss)
-
-**Other Options:**
-- `validate_only`: Run validation only (default: false)
-- `checkpoint_path`: Path to checkpoint for validation/resuming (default: null)
-
-## Generation
-To generate new images using a trained model, run:
-
-**With Justfile:**
-```bash
-just python generate.py --checkpoint path/to/checkpoint.ckpt --num_samples 16
-```
-
-**Without Justfile:**
-```bash
-python generate.py --checkpoint path/to/checkpoint.ckpt --num_samples 16
-```
-
-Key generation arguments:
-- `--checkpoint`: Path to model checkpoint (required)
-- `--num_samples`: Number of images to generate (default: 32)
-- `--batch_size`: Batch size for generation (default: 32)
-- `--output_dir`: Directory to save generated images (default: 'generated')
-- `--num_steps`: Number of steps for generation (default: 2)
-- `--channels`: Number of channels in generated images (default: 1)
-- `--height`: Height of generated images (default: 28)
-- `--width`: Width of generated images (default: 28)
-- `--seed`: Random seed for reproducibility (optional)
-
-## Model Architecture
-
-The flow matching model is implemented in `flow_matching_model.py`. It uses a UNet architecture to learn the velocity fields for the flow matching process.
+---
 
 ## Project Structure
 
 ```
-.
-├── README.md
-├── Justfile
-├── requirements.txt
-├── config/
-│   ├── train.yaml
-│   └── model/
-│       └── flow_matching.yaml
-├── train.py
-├── generate.py
-└── flow_matching_model.py
+flow-matching-mnist/
+├── src/                    # Source code
+│   ├── train.py          # Training script
+│   ├── models/           # Model definitions
+│   └── config/           # Configuration files
+├── visualizations/       # Visualization scripts
+│   ├── training/         # Sample quality visualizations
+│   └── lda/              # Trajectory analysis
+├── docs/                 # Documentation
+├── scripts/              # Download and utility scripts
+├── results/              # Generated outputs
+└── requirements.txt      # Dependencies
 ```
 
-## Example Usage
+---
 
-1. Train the model:
-**With Justfile:**
+## Model Details
+
+| Property | Value |
+|----------|-------|
+| Framework | PyTorch Lightning |
+| Architecture | UNet-based Flow Matcher |
+| Parameters | 8.6M |
+| Best Loss | 0.1829 |
+| Training Time | 5.2 hours (CPU) |
+| Inference Speed | ~2-5s per batch of 16 (50 ODE steps) |
+
+---
+
+## Downloads
+
+### PRIMARY (Essential - 300 MB)
+Best model checkpoint + code + key visualizations. Everything needed for inference.
+
 ```bash
-just python train.py data.batch_size=64 training.max_epochs=20 early_stopping.enabled=true
+bash scripts/download_primary.sh
 ```
 
-**Without Justfile:**
+### SECONDARY (Optional - 3 GB)
+All training artifacts, alternative checkpoints, frame sequences, and logs. Useful for analysis and research.
+
 ```bash
-python train.py data.batch_size=64 training.max_epochs=20 early_stopping.enabled=true
+bash scripts/download_secondary.sh
 ```
 
-2. Generate images:
-**With Justfile:**
-```bash
-just python generate.py --checkpoint checkpoints/flow-best.ckpt --num_samples 100 --num_steps 4
+---
+
+## Citation
+
+If you use this work, please cite:
+
+```bibtex
+@article{albergo2023flow,
+  title={Flow Matching for Generative Modeling},
+  author={Albergo, Michael S and others},
+  year={2023}
+}
 ```
 
-**Without Justfile:**
-```bash
-python generate.py --checkpoint checkpoints/flow-best.ckpt --num_samples 100 --num_steps 4
-```
+---
 
-Generated images will be saved in the specified output directory.
+## License
+
+MIT License - see [LICENSE](LICENSE) file
+
+---
+
+## Next Steps
+
+- See [INFERENCE_GUIDE.md](docs/10_INFERENCE_GUIDE.md) for detailed inference instructions
+- Check [VISUALIZATIONS_GUIDE.md](docs/VISUALIZATIONS_GUIDE.md) for all visualization options
+- Read [00_README.md](docs/00_README.md) for full project overview

@@ -3,6 +3,8 @@ import torch
 import torch.nn as nn
 import torchvision
 import pytorch_lightning as pl
+import matplotlib
+matplotlib.use('Agg')  # Non-interactive backend - no windows
 import matplotlib.pyplot as plt
 
 # flow_matching library imports
@@ -195,9 +197,6 @@ class ImageFlowMatcher(pl.LightningModule):
             grid = torchvision.utils.make_grid(sample_images, nrow=4, normalize=False, value_range=(0, 1))
             self.logger.experiment.add_image('generated_images', grid, self.current_epoch)
 
-            # Visualize in a notebook or interactive environment (optional)
-            plt.imshow(grid.permute(1, 2, 0).cpu().numpy())
-            plt.show()
             plt.close()
 
     def configure_optimizers(self):

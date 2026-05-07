@@ -34,3 +34,6 @@ results/lda_frames/
 # Logs
 training_*.log
 *.log
+
+# Prompt
+prompt

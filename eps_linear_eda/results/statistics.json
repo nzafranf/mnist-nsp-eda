@@ -1,0 +1,16 @@
+{
+  "lhs_min": 0.003436957029012389,
+  "lhs_max": 14.550154311992939,
+  "lhs_mean": 2.3423399669936646,
+  "rhs_min": 0.0031741601633095877,
+  "rhs_max": 6179.621685704453,
+  "rhs_mean": 134.87798018520633,
+  "violations": 35,
+  "violations_percentage": 1.4,
+  "num_trajectories": 50,
+  "num_steps": 100,
+  "grid_size": 50,
+  "n_substeps": 10,
+  "timestamp": "2026-05-09T20:15:08.549439",
+  "theorem_status": "FAIL"
+}

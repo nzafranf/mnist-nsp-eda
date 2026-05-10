@@ -1,0 +1,25 @@
+{
+  "analysis_type": "Per-Trajectory EDA",
+  "num_trajectories_analyzed": 10,
+  "selected_trajectory_indices": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45
+  ],
+  "timestamp": "2026-05-10",
+  "source_artifacts": {
+    "trajectories": "jacobian_eda/results/trajectories.npy",
+    "spectral_norms": "jacobian_eda/results/spectral_norms.npy",
+    "integrals": "jacobian_eda/results/integrals.npy",
+    "lhs_heatmap": "eps_linear_eda/results/lhs_heatmap.npy",
+    "rhs_heatmap": "eps_linear_eda/results/rhs_heatmap.npy"
+  },
+  "purpose": "Show diverse straightenability characteristics for NSP training"
+}

@@ -1,0 +1,140 @@
+{
+  "config": {
+    "tolerance": 0.01,
+    "alpha": 0.75,
+    "checkpoint": "C:\\Users\\Fadil\\Downloads\\Universitaet\\Research\\SwaraTTS\\code\\flow-matching-mnist\\PRIMARY\\checkpoints\\fm-balanced-epoch=014-train_loss=0.1829.ckpt",
+    "device": "cpu"
+  },
+  "samples": [
+    {
+      "sample_id": 0,
+      "nfe": 51,
+      "n_accepted": 17,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0009827613830566406,
+      "avg_step_size": 0.058823529411764705,
+      "min_step_size": 0.01,
+      "max_step_size": 0.06991085739625802,
+      "final_state_norm": 16.692049026489258
+    },
+    {
+      "sample_id": 1,
+      "nfe": 51,
+      "n_accepted": 17,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0010173320770263672,
+      "avg_step_size": 0.0588235294117647,
+      "min_step_size": 0.01,
+      "max_step_size": 0.06947712882067762,
+      "final_state_norm": 16.8657169342041
+    },
+    {
+      "sample_id": 2,
+      "nfe": 51,
+      "n_accepted": 17,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0009996891021728516,
+      "avg_step_size": 0.058823529411764705,
+      "min_step_size": 0.01,
+      "max_step_size": 0.07037466583602207,
+      "final_state_norm": 16.509620666503906
+    },
+    {
+      "sample_id": 3,
+      "nfe": 51,
+      "n_accepted": 17,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0,
+      "avg_step_size": 0.058823529411764705,
+      "min_step_size": 0.01,
+      "max_step_size": 0.06971954060227571,
+      "final_state_norm": 16.768041610717773
+    },
+    {
+      "sample_id": 4,
+      "nfe": 54,
+      "n_accepted": 18,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0009891986846923828,
+      "avg_step_size": 0.055555555555555566,
+      "min_step_size": 0.0029571457674588686,
+      "max_step_size": 0.06965365302091736,
+      "final_state_norm": 17.27667808532715
+    },
+    {
+      "sample_id": 5,
+      "nfe": 51,
+      "n_accepted": 17,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0010106563568115234,
+      "avg_step_size": 0.058823529411764705,
+      "min_step_size": 0.01,
+      "max_step_size": 0.06944009959462458,
+      "final_state_norm": 16.88047218322754
+    },
+    {
+      "sample_id": 6,
+      "nfe": 51,
+      "n_accepted": 17,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0,
+      "avg_step_size": 0.058823529411764705,
+      "min_step_size": 0.01,
+      "max_step_size": 0.07000579262677191,
+      "final_state_norm": 16.654436111450195
+    },
+    {
+      "sample_id": 7,
+      "nfe": 54,
+      "n_accepted": 18,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0,
+      "avg_step_size": 0.05555555555555555,
+      "min_step_size": 0.006011723910328337,
+      "max_step_size": 0.06940123795228417,
+      "final_state_norm": 17.37991714477539
+    },
+    {
+      "sample_id": 8,
+      "nfe": 54,
+      "n_accepted": 18,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0010001659393310547,
+      "avg_step_size": 0.055555555555555566,
+      "min_step_size": 0.01,
+      "max_step_size": 0.06899770368895936,
+      "final_state_norm": 17.54821014404297
+    },
+    {
+      "sample_id": 9,
+      "nfe": 54,
+      "n_accepted": 18,
+      "n_rejected": 0,
+      "reject_rate": 0.0,
+      "wall_time_sec": 0.0010001659393310547,
+      "avg_step_size": 0.05555555555555555,
+      "min_step_size": 0.01,
+      "max_step_size": 0.06897841259082428,
+      "final_state_norm": 17.55595588684082
+    }
+  ],
+  "aggregate_metrics": {
+    "total_time": 0.006999969482421875,
+    "avg_nfe": 52.2,
+    "avg_steps": 17.4,
+    "avg_reject_rate": 0.0,
+    "total_nfe": 522,
+    "avg_time_per_sample": 0.0006999969482421875,
+    "std_time_per_sample": 0.0004583458997580552,
+    "throughput": 1428.5776566757493
+  }
+}

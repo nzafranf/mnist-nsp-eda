@@ -1,0 +1,269 @@
+================================================================================
+  PER-TRAJECTORY EDA IMPROVEMENTS - QUICK REFERENCE
+================================================================================
+
+PROJECT: Flow Matching on MNIST
+COMPLETION DATE: 2026-05-10
+STATUS: ✓ COMPLETE
+
+================================================================================
+THE 6 IMPROVEMENTS AT A GLANCE
+================================================================================
+
+1. PCA EXPLAINABILITY METRICS
+   └─ Axis labels now show: PC1 (19.9%), PC2 (9.1%)
+   └─ Summary stats show: "Unified Axes for All 10 Trajectories"
+   └─ Readers understand 29% of information is in 2D projection
+
+2. UNIFIED AXIS RANGES
+   └─ All 10 trajectories use IDENTICAL x/y limits:
+   └─ X: [-8.60, 7.58] | Y: [-7.06, 5.69]
+   └─ Enables direct size & position comparison across trajectories
+
+3. KDE CONTOURS (Jacobian Panel)
+   └─ White contour lines overlay on heatmap
+   └─ Epsilon thresholds: [0.05, 0.1, 0.15, 0.2, 0.3, 0.4]
+   └─ Interior of ε=0.2 contour = straightenable region
+
+4. VIOLATION MARKERS (LHS Panel)
+   └─ Red X symbols mark cells where LHS > RHS (theorem violations)
+   └─ Count displayed in legend (e.g., "Violations: 12")
+   └─ Rare violations (<1%) = good; frequent (>5%) = problematic
+
+5. LOG SCALE FOR PROFILES
+   └─ Curvature [1,2]: semilogy (was linear)
+   └─ Lipschitz [1,3]: semilogy (was linear)
+   └─ Reveals structure across 4+ orders of magnitude
+
+6. RHS/LHS RATIO HEATMAP (NEW PANEL [3,1])
+   └─ Shows bound tightness across time-interval grid
+   └─ Green (≈1) = tight bounds | Red (>>10) = loose bounds
+   └─ Helps NSP prioritize regions with reliable bounds
+
+================================================================================
+FILES GENERATED
+================================================================================
+
+VISUALIZATIONS (per_trajectory_eda_results_improved/):
+  ✓ trajectory_00_eda_improved.png  (464 KB)
+  ✓ trajectory_05_eda_improved.png  (463 KB)
+  ✓ trajectory_10_eda_improved.png  (460 KB)
+  ✓ trajectory_15_eda_improved.png  (465 KB)
+  ✓ trajectory_20_eda_improved.png  (462 KB)
+  ✓ trajectory_25_eda_improved.png  (464 KB)
+  ✓ trajectory_30_eda_improved.png  (464 KB)
+  ✓ trajectory_35_eda_improved.png  (460 KB)
+  ✓ trajectory_40_eda_improved.png  (461 KB)
+  ✓ trajectory_45_eda_improved.png  (464 KB)
+
+  TOTAL: 4.5 MB (10 improved visualizations)
+
+METADATA & DOCUMENTATION:
+  ✓ per_trajectory_summary_improved.json  (1.4 KB, metadata)
+  ✓ README.md                            (13.5 KB, detailed guide)
+
+SCRIPT (Reusable template):
+  ✓ per_trajectory_eda_improved.py       (230 lines, well-documented)
+
+SUMMARY DOCUMENTS:
+  ✓ IMPROVED_ANALYSIS_SUMMARY.md         (This session's full report)
+  ✓ IMPROVEMENT_QUICKREF.txt             (This file)
+
+================================================================================
+PANEL LAYOUT COMPARISON
+================================================================================
+
+ORIGINAL (3×3):                    IMPROVED (4×3):
+  PCA projection                     PCA (unified axes + variance %)
+  Curvature (linear)                 Curvature (LOG SCALE)
+  Lipschitz (linear)                 Lipschitz (LOG SCALE)
+
+  Jacobian heatmap                   Jacobian + KDE CONTOURS
+  LHS heatmap                        LHS + VIOLATION MARKERS (red X)
+  RHS heatmap                        RHS heatmap
+
+  Curvature histogram                RHS/LHS RATIO (NEW!)
+  Lipschitz histogram                Curvature histogram
+  Summary stats                      Lipschitz histogram
+
+                                     Summary stats (full width, row 4)
+
+================================================================================
+QUICK INTERPRETATIONS
+================================================================================
+
+PCA PROJECTION [1,1]:
+  • Same axis range for all 10 trajectories
+  • Trajectory at edges = spans full latent space
+  • Trajectory clustered in center = compact behavior
+  • Green circle = starting point (noise)
+  • Red square = ending point (data)
+
+CURVATURE PROFILE [1,2] (LOG SCALE):
+  • High early (t≈0): Noise-to-structure complexity
+  • Low late (t≈1): Refinement phase smoothness
+  • Spikes on log scale = sharp directional turns
+  • Flat baseline = smooth trajectory
+
+LIPSCHITZ PROFILE [1,3] (LOG SCALE):
+  • High = velocity field sensitive to perturbations
+  • Low = robust velocity field
+  • Growing trend = increasing sensitivity late
+  • Decreasing trend = noise sensitivity early
+
+JACOBIAN + KDE CONTOURS [2,1]:
+  • Interior of ε=0.2 contour = safe for compression
+  • Tighter contours = fewer straightenable regions
+  • Lower-left corner typically has high straightenability
+  • Upper-right = complex regions
+
+LHS + VIOLATIONS [2,2]:
+  • Purple = low error (good compression)
+  • Yellow = high error (bad compression)
+  • Red X = theorem violation (rare, expected in high-curvature)
+  • Count violations: 0-5% normal, >10% problematic
+
+RHS/LHS RATIO [3,1]:
+  • Green zones (ratio ≈ 1-2): Bounds match practice perfectly
+  • Yellow zones (ratio ≈ 10): Bounds 10× larger than needed
+  • Red zones (ratio ≈ 100+): Bounds very conservative
+  • Helps NSP: tight regions trust bounds, loose regions add margin
+
+================================================================================
+STATISTICS SUMMARY
+================================================================================
+
+PCA EXPLAINABILITY:
+  PC1: 19.9% variance
+  PC2:  9.1% variance
+  Total 2D: 29.0%
+  (Interpretation: 71% of trajectory info in other 782 dimensions)
+
+STRAIGHTENABILITY (ε < 0.2):
+  Trajectory #00: 21% of cells
+  Trajectory #45: 50% of cells
+  Range: 18% - 50% (diverse patterns!)
+
+VIOLATIONS (LHS > RHS):
+  Most trajectories: < 1% (0-25 cells out of 2500)
+  Range: 0.0% - 2.0%
+  Expected due to finite-difference numerics
+
+BOUND TIGHTNESS (RHS/LHS ratio):
+  Mean tightness across all cells: 1.5x to 5.0x
+  (Interpretation: Bounds are 1.5-5.0× larger than actual error)
+  Median per-trajectory: Usually 2.0x - 3.0x
+
+================================================================================
+EXECUTION STATISTICS
+================================================================================
+
+Original per-trajectory EDA:
+  Time: ~10 seconds
+  Output: 3×3 = 9 panels
+  File size: ~300 KB per trajectory (2.9 MB total for 10)
+
+Improved per-trajectory EDA:
+  Time: ~15 seconds (5 second overhead for enhancements)
+  Output: 4×3 = 12 panels
+  File size: ~460 KB per trajectory (4.5 MB total for 10)
+
+Storage increase: 1.56x (from 2.9 MB to 4.5 MB for added information layers)
+
+================================================================================
+NEXT STEPS FOR NSP TRAINING
+================================================================================
+
+1. FEATURE EXTRACTION
+   From each trajectory's summary stats, extract:
+   - Curvature profile stats (mean, max, std from log-scale data)
+   - Lipschitz stats (mean, max, std)
+   - Straightenability ratio (% of ε<0.2 cells)
+   - Position in latent space
+   - Time-dependent properties
+
+2. CREATE TRAINING PAIRS
+   (features) → (optimal_step_size, violation_avoidance_weight)
+
+3. TRAIN NSP
+   - Input: trajectory properties (from improvements)
+   - Output: adaptive step size Δt*
+   - Loss: minimize error subject to bound constraints
+
+4. VALIDATE
+   - Check predictions correlate with RHS/LHS ratio
+   - Ensure violations are avoided in high-ratio regions
+   - Test on trajectories not in training set
+
+================================================================================
+COMPARISON WITH ORIGINAL
+================================================================================
+
+Information Layer          Original  Improved  Gain
+─────────────────────────────────────────────────────
+PCA variance info          ✗         ✓         NEW
+Unified axis ranges        ✗         ✓         NEW
+Jacobian KDE contours      ✗         ✓         NEW
+LHS violation markers      ✗         ✓         NEW
+Curvature log scale        ✗         ✓         ENHANCEMENT
+Lipschitz log scale        ✗         ✓         ENHANCEMENT
+RHS/LHS ratio heatmap      ✗         ✓         NEW
+Summary violation count    ✗         ✓         NEW
+Summary ratio stats        ✗         ✓         NEW
+
+Total enhancement: 6 major improvements across 12 panels
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+"The contours on [2,1] are hard to see"
+  → This is expected for smoothly varying integrals
+  → Labels show epsilon values
+  → Interior of contour is the "safe zone"
+
+"The red X's on [2,2] all cluster in one area"
+  → Violations correlate with high curvature (see [1,2])
+  → This is expected behavior; see if it matches [1,2] peaks
+
+"The RHS/LHS ratio is all red (all very large)"
+  → Bounds are very conservative for this trajectory
+  → Still valid; just means theory adds large safety margin
+  → NSP can learn to use smaller steps than bounds guarantee
+
+"Different trajectories have different axis ranges"
+  → If comparing visually, axis ranges should be IDENTICAL
+  → Check json: unified_x_limits and unified_y_limits
+  → If different, re-run with all 10 selected trajectories
+
+================================================================================
+REFERENCES & CITATIONS
+================================================================================
+
+THEOREM 3.1 (EPS Linear):
+  ||x̂^N - x̂^1|| ≤ εH² (e^(LH) - 1)/(LH) · (1 + 1/N)
+  Where:
+    ε = curvature bound
+    H = interval length
+    L = Lipschitz constant
+    N = number of steps
+
+THEOREM 4.1 (Jacobian):
+  Straightenability ≡ ∫ ||∇_x v_θ|| dt over interval [t_a, t_b]
+  Measures linearizability via geodesic deviation
+
+KDE SMOOTHING:
+  scipy.ndimage.gaussian_filter with sigma=1.5
+
+================================================================================
+CONTACT / QUESTIONS
+================================================================================
+
+For detailed interpretation: See per_trajectory_eda_results_improved/README.md
+For implementation details: See IMPROVED_ANALYSIS_SUMMARY.md
+For code customization: Edit per_trajectory_eda_improved.py (line 88 for epsilon levels)
+
+Generated: 2026-05-10
+Status: ✓ COMPLETE AND VALIDATED
+
+================================================================================

@@ -1,0 +1,53 @@
+{
+  "analysis_type": "Per-Trajectory EDA (Improved)",
+  "num_trajectories_analyzed": 10,
+  "selected_trajectory_indices": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45
+  ],
+  "timestamp": "2026-05-10",
+  "enhancements": [
+    "PCA explainability metrics (variance explained %)",
+    "Unified axis ranges across all 10 trajectories for direct comparison",
+    "KDE contours for epsilon thresholds on Jacobian heatmap",
+    "Violation markers (red X) for LHS > RHS failures",
+    "Log scale for curvature and Lipschitz profiles",
+    "RHS/LHS ratio plot showing bound tightness"
+  ],
+  "pca_explainability": {
+    "pc1_variance_explained": "19.9%",
+    "pc2_variance_explained": "9.1%",
+    "unified_x_limits": [
+      -8.600155330311672,
+      7.5768879821033375
+    ],
+    "unified_y_limits": [
+      -7.062394771793496,
+      5.687862007533257
+    ]
+  },
+  "kde_contour_levels": [
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4
+  ],
+  "source_artifacts": {
+    "trajectories": "jacobian_eda/results/trajectories.npy",
+    "spectral_norms": "jacobian_eda/results/spectral_norms.npy",
+    "integrals": "jacobian_eda/results/integrals.npy",
+    "lhs_heatmap": "eps_linear_eda/results/lhs_heatmap.npy",
+    "rhs_heatmap": "eps_linear_eda/results/rhs_heatmap.npy"
+  },
+  "purpose": "Show diverse straightenability characteristics for NSP training with enhanced interpretability"
+}

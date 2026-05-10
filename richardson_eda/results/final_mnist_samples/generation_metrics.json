@@ -1,0 +1,92 @@
+{
+  "model_checkpoint": "PRIMARY\\checkpoints\\fm-balanced-epoch=014-train_loss=0.1829.ckpt",
+  "device": "cpu",
+  "num_samples": 10,
+  "ode_steps": 50,
+  "samples": [
+    {
+      "sample_id": 0,
+      "wall_time_sec": 1.9050018787384033,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.11090743541717529
+    },
+    {
+      "sample_id": 1,
+      "wall_time_sec": 2.1330015659332275,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.14944182336330414
+    },
+    {
+      "sample_id": 2,
+      "wall_time_sec": 2.4530012607574463,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.11297868937253952
+    },
+    {
+      "sample_id": 3,
+      "wall_time_sec": 2.4256181716918945,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.08795834332704544
+    },
+    {
+      "sample_id": 4,
+      "wall_time_sec": 1.9630041122436523,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.11328541487455368
+    },
+    {
+      "sample_id": 5,
+      "wall_time_sec": 2.3519999980926514,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.11106853187084198
+    },
+    {
+      "sample_id": 6,
+      "wall_time_sec": 2.313997268676758,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.13493742048740387
+    },
+    {
+      "sample_id": 7,
+      "wall_time_sec": 2.2380034923553467,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.12416684627532959
+    },
+    {
+      "sample_id": 8,
+      "wall_time_sec": 1.97599458694458,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.15592223405838013
+    },
+    {
+      "sample_id": 9,
+      "wall_time_sec": 1.9950017929077148,
+      "ode_steps": 50,
+      "value_min": 0.0,
+      "value_max": 1.0,
+      "value_mean": 0.11084727197885513
+    }
+  ],
+  "total_time_sec": 21.754624128341675,
+  "avg_time_per_sample": 2.1754624128341673,
+  "std_time_per_sample": 0.19654982323529152,
+  "throughput_samples_per_sec": 0.4596723869373645
+}

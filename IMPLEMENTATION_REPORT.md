@@ -7,6 +7,177 @@
 
 ---
 
+## Figure Index
+
+This report contains comprehensive visualizations of the Flow Matching model and EDA analyses:
+
+### Flow Field & Model Visualizations (Figures 0.1 - 0.8)
+- **0.1**: Flow field with MNIST trajectories
+- **0.2**: Flow field density distribution
+- **0.3**: Sample flow trajectories
+- **0.4**: LDA digit clusters
+- **0.5**: Trajectory evolution through generation
+- **0.6**: Training loss curves
+- **0.7**: Generated MNIST samples
+- **0.8**: Step-by-step generation process
+
+### Velocity Field Analysis (Figures 1.0a - 1.0c)
+- **1.0a**: Velocity field at interval [t=0.0, t=0.1]
+- **1.0b**: Velocity field at interval [t=0.1, t=0.2]
+- **1.0c**: Velocity field at interval [t=0.2, t=0.3]
+
+### Jacobian EDA Results (Figures 1.1 - 1.2)
+- **1.1**: Main Jacobian EDA 4-panel analysis
+- **1.2**: Enhanced lower triangle with KDE bounds
+
+### EPS Linear EDA Results (Figures 2.1 - 2.2)
+- **2.1**: Supporting 1D analysis graphs
+- **2.2**: Triple heatmap (LHS, RHS, ratio, violations)
+
+---
+
+## Preamble: Flow Matching Model & Velocity Field
+
+### Background: What is Flow Matching?
+
+Flow Matching is a generative modeling technique that learns to transform noise distributions into data distributions via continuous paths (flows) in high-dimensional space. Unlike diffusion models that fix the forward process, Flow Matching learns a flexible velocity field that guides the transformation.
+
+**Mathematical Framework**:
+$$\frac{dx}{dt} = v_\theta(x(t), t)$$
+
+where:
+- $x(t) \in \mathbb{R}^{784}$ is the state at time $t$ (flattened MNIST image)
+- $v_\theta: \mathbb{R}^{784} \times [0,1] \to \mathbb{R}^{784}$ is the learned velocity field
+- $\theta$ are neural network parameters
+- $t \in [0, 1]$ is the "time" parameter (0 = noise, 1 = data)
+
+### Model Details
+
+**Architecture**: ImageFlowMatcher
+- **Backbone**: U-Net style convolutional architecture
+- **Conditioning**: Time-conditioned velocity field v_θ(x, t)
+- **Input space**: MNIST images (28×28 = 784 dimensions)
+- **Training objective**: Match ground truth flow trajectories
+
+**Training Configuration**:
+- **Checkpoint**: `fm-balanced-epoch=014-train_loss=0.1829.ckpt`
+- **Path**: `outputs/fm/2026-05-01/22-58-12/training_logs/version_0/checkpoints/`
+- **Timestamp**: 2026-05-01 22:58:12
+- **Final loss**: 0.1829 (on epoch 14)
+- **Dataset**: MNIST (10,000 training images)
+
+#### **Model Training & Performance**
+
+![Loss Curves](../PRIMARY/results/loss_curves.png)
+
+**Figure 0.6**: Training loss curves
+- Shows convergence of the Flow Matching model
+- Final epoch 14 achieves loss = 0.1829
+- Loss profile informs velocity field quality
+
+![Generated Samples](../PRIMARY/results/generated_samples.png)
+
+**Figure 0.7**: Generated MNIST samples from trained model
+- Shows quality of learned velocity field
+- Samples demonstrate successful noise-to-digit transformation
+- Visual evidence of smooth trajectories
+
+![Generation Process](../PRIMARY/results/generation_process.png)
+
+**Figure 0.8**: Step-by-step generation process
+- Shows transformation at different time points
+- Demonstrates time-dependent velocity field behavior
+- Basis for understanding curvature variation
+
+### Trajectory Generation
+
+For analysis, we generate trajectories by solving the ODE with trained velocity field:
+
+**ODE Solver Configuration**:
+- **Method**: dopri5 (Runge-Kutta 4/5 adaptive step)
+- **Time grid**: $t \in [0, 0.999]$ with 100 uniform steps
+- **Tolerances**: atol = 1e-4, rtol = 1e-4
+- **Sample size**: 50 trajectories per analysis
+- **Initial condition**: $x(0) \sim \mathcal{N}(0, I)$ (Gaussian noise)
+
+**Output**:
+$$x(t) = \text{ODESolve}(v_\theta, x_0, t) \quad \text{for } t \in [0, 0.999]$$
+
+### The Velocity Field Landscape
+
+The velocity field $v_\theta(x, t)$ has several interesting properties:
+
+**Smoothness**: The field is differentiable w.r.t. $x$ (via backpropagation)
+- Enables computation of Jacobian $\nabla_x v_\theta$
+- Spectral norm $\|\nabla_x v_\theta\|_2$ measures local Lipschitz constant
+
+**Time-dependence**: Velocity varies significantly across time
+- Early times ($t \approx 0$): Rough, high-curvature flows (noise → structure)
+- Late times ($t \approx 1$): Smoother, lower-curvature flows (refinement)
+
+**Curvature**: Trajectories have varying acceleration
+- $\ddot{x}(t) = \partial_t v_\theta + (\nabla_x v_\theta) v_\theta$
+- High curvature indicates rapid direction changes
+- Important for step compression analysis
+
+#### **Flow Field Visualizations**
+
+![Flow Field with MNIST](results/flow_field/flow_field_with_mnist.png)
+
+**Figure 0.1**: Flow field landscape showing:
+- MNIST digit trajectories in learned latent space
+- Color-coded density of trajectories
+- Shows how noise distributions transform into digit manifolds
+- Illustrates complexity of velocity field across different regions
+
+![Flow Field Density](results/flow_field/flow_field_density.png)
+
+**Figure 0.2**: Density distribution of flow trajectories
+- Shows concentration of trajectories in different regions
+- Helps understand where velocity field is most active
+- Darker regions = higher trajectory density
+
+![Flow Field Trajectories](results/flow_field/flow_field_trajectories.png)
+
+**Figure 0.3**: Sample trajectories through latent space
+- Individual trajectory paths from noise to data
+- Shows curvature and path complexity
+- Basis for our Jacobian and step compression analysis
+
+![LDA Digit Clusters](results/flow_field/lda_digit_clusters.png)
+
+**Figure 0.4**: LDA projection of digit clusters in learned space
+- Shows how different digits cluster
+- Related to velocity field organization
+- Each cluster has different trajectory characteristics
+
+![Trajectory Evolution](../PRIMARY/results/trajectory_evolution.png)
+
+**Figure 0.5**: Evolution of trajectories during generation
+- Shows how noise progressively transforms into recognizable digits
+- Illustrates the time-dependent nature of the velocity field
+- Important for understanding curvature variation across time
+
+### Why These EDAs Matter
+
+1. **Jacobian EDA**: Identifies which time intervals have "linear" (low-curvature) trajectories
+   - Can compress multiple Euler steps into larger steps
+   - Reduces sampling cost for inference
+
+2. **EPS Linear EDA**: Validates theoretical bounds on compression error
+   - Ensures safe compression doesn't violate error tolerances
+   - Informs adaptive step-size selection
+
+### Connection to Theorem 4.1 & 3.1
+
+These theorems provide mathematical guarantees:
+- **Theorem 4.1 (Linearizability)**: If geodesic deviation $\int \|\nabla_x v\| dt$ is small, trajectory is approximately linear
+- **Theorem 3.1 (Step Compression)**: Actual compression error is bounded by curvature $\varepsilon$ and Lipschitz constant $L$
+
+Our EDAs empirically validate these guarantees on real Flow Matching trajectories.
+
+---
+
 ## Executive Summary
 
 Implemented two complementary EDA (Empirical Data Analysis) suites for Flow Matching MNIST model:
@@ -116,6 +287,29 @@ jacobian_eda/results/
   "num_steps": 100
 }
 ```
+
+#### **Velocity Field Structure at Different Time Intervals**
+
+![Velocity Interval t00-10](results/flow_field/velocity_interval_t00_to_10.png)
+
+**Figure 1.0a**: Velocity field magnitude at interval [t=0.0, t=0.1]
+- Early times show highest velocity magnitudes
+- Sharp transitions from noise regions
+- High curvature expected in this region
+
+![Velocity Interval t01-10](results/flow_field/velocity_interval_t01_to_10.png)
+
+**Figure 1.0b**: Velocity field magnitude at interval [t=0.1, t=0.2]
+- Transitional phase with moderate velocities
+- Structure refinement in progress
+- Mixed curvature characteristics
+
+![Velocity Interval t02-10](results/flow_field/velocity_interval_t02_to_10.png)
+
+**Figure 1.0c**: Velocity field magnitude at interval [t=0.2, t=0.3]
+- Later times with lower velocities
+- Fine-grained detail adjustments
+- Smoother curvature profile expected
 
 #### **Key Finding**: 58.6% of time intervals are straightenable
 - Regions with low integral of spectral norm

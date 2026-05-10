@@ -1,0 +1,132 @@
+{
+  "method": "Explicit Algorithm 5.1 (AdaptiveFlowSolver)",
+  "config": {
+    "tolerance": 0.01,
+    "alpha": 0.75,
+    "f_min": 0.1,
+    "f_max": 5.0,
+    "max_steps": 5000
+  },
+  "samples": [
+    {
+      "sample_id": 0,
+      "nfe": 147,
+      "n_steps": 45,
+      "n_rejected": 4,
+      "reject_rate": 0.08163265306122448,
+      "wall_time_sec": 2.1027638912200928,
+      "avg_step_size": 0.022222222222222223,
+      "min_step_size": 0.0021647248756291315,
+      "max_step_size": 0.034215599551345385
+    },
+    {
+      "sample_id": 1,
+      "nfe": 159,
+      "n_steps": 50,
+      "n_rejected": 3,
+      "reject_rate": 0.05660377358490566,
+      "wall_time_sec": 1.9279201030731201,
+      "avg_step_size": 0.019999999999999997,
+      "min_step_size": 0.0023884533306607336,
+      "max_step_size": 0.02747359609078441
+    },
+    {
+      "sample_id": 2,
+      "nfe": 138,
+      "n_steps": 44,
+      "n_rejected": 2,
+      "reject_rate": 0.043478260869565216,
+      "wall_time_sec": 1.6193108558654785,
+      "avg_step_size": 0.022727272727272728,
+      "min_step_size": 0.002945950975042688,
+      "max_step_size": 0.035282768752009454
+    },
+    {
+      "sample_id": 3,
+      "nfe": 150,
+      "n_steps": 47,
+      "n_rejected": 3,
+      "reject_rate": 0.06,
+      "wall_time_sec": 1.7545909881591797,
+      "avg_step_size": 0.02127659574468085,
+      "min_step_size": 0.003032171852624721,
+      "max_step_size": 0.03576737506712271
+    },
+    {
+      "sample_id": 4,
+      "nfe": 150,
+      "n_steps": 48,
+      "n_rejected": 2,
+      "reject_rate": 0.04,
+      "wall_time_sec": 1.7610931396484375,
+      "avg_step_size": 0.020833333333333332,
+      "min_step_size": 3.191452136241946e-05,
+      "max_step_size": 0.030412677174523072
+    },
+    {
+      "sample_id": 5,
+      "nfe": 135,
+      "n_steps": 41,
+      "n_rejected": 4,
+      "reject_rate": 0.08888888888888889,
+      "wall_time_sec": 2.469667673110962,
+      "avg_step_size": 0.024390243902439025,
+      "min_step_size": 0.0023105168637874707,
+      "max_step_size": 0.04083055085447835
+    },
+    {
+      "sample_id": 6,
+      "nfe": 153,
+      "n_steps": 48,
+      "n_rejected": 3,
+      "reject_rate": 0.058823529411764705,
+      "wall_time_sec": 2.0772905349731445,
+      "avg_step_size": 0.020833333333333332,
+      "min_step_size": 0.001429159499905075,
+      "max_step_size": 0.03286553810689834
+    },
+    {
+      "sample_id": 7,
+      "nfe": 156,
+      "n_steps": 49,
+      "n_rejected": 3,
+      "reject_rate": 0.057692307692307696,
+      "wall_time_sec": 1.8513157367706299,
+      "avg_step_size": 0.020408163265306128,
+      "min_step_size": 0.0001554386392166318,
+      "max_step_size": 0.031200761765244125
+    },
+    {
+      "sample_id": 8,
+      "nfe": 150,
+      "n_steps": 46,
+      "n_rejected": 4,
+      "reject_rate": 0.08,
+      "wall_time_sec": 1.765420913696289,
+      "avg_step_size": 0.021739130434782608,
+      "min_step_size": 3.8348462910953174e-05,
+      "max_step_size": 0.036053834392300886
+    },
+    {
+      "sample_id": 9,
+      "nfe": 144,
+      "n_steps": 45,
+      "n_rejected": 3,
+      "reject_rate": 0.0625,
+      "wall_time_sec": 1.6694974899291992,
+      "avg_step_size": 0.02222222222222222,
+      "min_step_size": 0.0027289138917838685,
+      "max_step_size": 0.033870052944805724
+    }
+  ],
+  "aggregate_metrics": {
+    "total_time": 18.998871326446533,
+    "avg_time": 1.8998871326446534,
+    "std_time": 0.2430399512928564,
+    "total_nfe": 1482,
+    "avg_nfe": 148.2,
+    "avg_steps": 46.3,
+    "avg_reject_rate": 0.06296194135086566,
+    "throughput": 0.5263470565264551
+  }
+}

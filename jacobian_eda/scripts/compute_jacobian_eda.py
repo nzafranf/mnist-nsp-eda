@@ -204,6 +204,76 @@ def save_artifacts(config: JacobianEDAConfig, trajectories: np.ndarray, spectral
     print(f"  Saved statistics")
 
 
+def create_enhanced_lower_triangle_viz(config: JacobianEDAConfig, stats: dict, mask: np.ndarray):
+    """Create enhanced visualization with lower triangle only and KDE bounds."""
+    from scipy.ndimage import gaussian_filter
+
+    print("\nCreating enhanced lower triangle visualization with KDE bounds...")
+
+    mean_integral = stats['mean']
+
+    # Create lower triangle mask
+    grid_size = config.grid_size
+    lower_triangle = np.tril(np.ones((grid_size, grid_size)))
+
+    # Mask upper triangle with NaNs for better visualization
+    mean_integral_lt = np.where(lower_triangle, mean_integral, np.nan)
+
+    fig, axes = plt.subplots(1, 2, figsize=(16, 7))
+    fig.suptitle('Jacobian EDA: Lower Triangle Analysis with KDE Bounds',
+                fontsize=14, fontweight='bold')
+
+    # Panel 1: Heatmap with KDE contours
+    im0 = axes[0].imshow(mean_integral_lt, cmap='viridis', aspect='auto', origin='lower',
+                        vmin=mean_integral.min(), vmax=mean_integral.max())
+    axes[0].set_title('Geodesic Deviation (Lower Triangle) with Threshold Boundaries',
+                     fontsize=13, fontweight='bold')
+    axes[0].set_xlabel('t_b (end time)', fontsize=12)
+    axes[0].set_ylabel('t_a (start time)', fontsize=12)
+
+    # Add KDE contour bounds for various epsilon thresholds
+    epsilon_thresholds = [0.05, 0.1, 0.15, 0.2, 0.3, 0.4]
+    colors = plt.cm.Set1(np.linspace(0, 1, len(epsilon_thresholds)))
+
+    # Create a smoothed version for contours using KDE-like gaussian filter
+    mean_smooth = gaussian_filter(mean_integral, sigma=1.5)
+
+    # Add contour lines for each threshold
+    x_grid = np.arange(grid_size)
+    y_grid = np.arange(grid_size)
+    X, Y = np.meshgrid(x_grid, y_grid)
+
+    for eps_thresh, color in zip(epsilon_thresholds, colors):
+        contours = axes[0].contour(X, Y, mean_smooth, levels=[eps_thresh],
+                                  colors=[color], linewidths=2.5, alpha=0.8)
+        # Label the contour
+        axes[0].clabel(contours, inline=True, fontsize=9, fmt=f'ε={eps_thresh:.2f}')
+
+    cbar0 = plt.colorbar(im0, ax=axes[0])
+    cbar0.set_label('Geodesic Deviation Integral', fontsize=11)
+
+    # Panel 2: Straightenability mask with lower triangle
+    mask_lt = np.where(lower_triangle, mask.astype(float), np.nan)
+
+    im1 = axes[1].imshow(mask_lt, cmap='RdYlGn', aspect='auto', origin='lower',
+                        vmin=0, vmax=1)
+    axes[1].set_title(f'Straightenability Mask (ε={config.epsilon_straightenable})',
+                     fontsize=13, fontweight='bold')
+    axes[1].set_xlabel('t_b (end time)', fontsize=12)
+    axes[1].set_ylabel('t_a (start time)', fontsize=12)
+
+    cbar1 = plt.colorbar(im1, ax=axes[1])
+    cbar1.set_ticks([0, 1])
+    cbar1.set_ticklabels(['No', 'Yes'])
+    cbar1.set_label('Straightenable', fontsize=11)
+
+    plt.tight_layout()
+    save_path = config.results_dir / "jacobian_eda_lower_triangle_kde.png"
+    plt.savefig(save_path, dpi=150, bbox_inches='tight')
+    print(f"  Saved enhanced visualization to {save_path}")
+    plt.close()
+
+
 def create_visualizations(config: JacobianEDAConfig, stats: dict, mask: np.ndarray, t_grid: np.ndarray):
     """Create and save visualization heatmaps."""
     print("\nCreating visualizations...")
@@ -306,6 +376,9 @@ def main():
     # Create visualizations
     create_visualizations(config, stats, mask, t_grid)
 
+    # Create enhanced lower triangle visualization with KDE bounds
+    create_enhanced_lower_triangle_viz(config, stats, mask)
+
     print("\n" + "=" * 80)
     print("JACOBIAN EDA COMPLETE")
     print("=" * 80)
@@ -316,6 +389,7 @@ def main():
     print(f"  - straightenability_mask.npy: Binary mask for straightenable regions")
     print(f"  - statistics.json: Summary statistics")
     print(f"  - jacobian_eda_analysis.png: Visualization heatmaps")
+    print(f"  - jacobian_eda_lower_triangle_kde.png: Lower triangle with KDE bounds")
 
 
 if __name__ == '__main__':

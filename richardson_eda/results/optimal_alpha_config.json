@@ -1,0 +1,8 @@
+{
+  "tolerance": 0.1,
+  "alpha": 0.8,
+  "estimated_nfe": 47.76,
+  "estimated_error": 10.328884249257529,
+  "estimated_reject_rate": 0.04123796009631922,
+  "num_candidates": 21
+}

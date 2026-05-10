@@ -1,0 +1,86 @@
+{
+  "selected_trajectories": [
+    0,
+    5,
+    10,
+    16,
+    21,
+    27,
+    32,
+    38,
+    43,
+    49
+  ],
+  "analyses": [
+    {
+      "trajectory_idx": 0,
+      "correlation": -0.5538337015740121,
+      "mean_step_size": 0.007744186046511627,
+      "mean_curvature": 85.91241707655519,
+      "n_steps": 129
+    },
+    {
+      "trajectory_idx": 5,
+      "correlation": -0.5004626432723221,
+      "mean_step_size": 0.0075681818181818185,
+      "mean_curvature": 92.69973701499907,
+      "n_steps": 132
+    },
+    {
+      "trajectory_idx": 10,
+      "correlation": -0.5960200227680765,
+      "mean_step_size": 0.0073455882352941185,
+      "mean_curvature": 96.85893337274572,
+      "n_steps": 136
+    },
+    {
+      "trajectory_idx": 16,
+      "correlation": -0.5867087670352833,
+      "mean_step_size": 0.007684615384615382,
+      "mean_curvature": 88.22935679206677,
+      "n_steps": 130
+    },
+    {
+      "trajectory_idx": 21,
+      "correlation": -0.5864916793654029,
+      "mean_step_size": 0.007511278195488724,
+      "mean_curvature": 88.11693522589216,
+      "n_steps": 133
+    },
+    {
+      "trajectory_idx": 27,
+      "correlation": -0.5700379549264523,
+      "mean_step_size": 0.007684615384615384,
+      "mean_curvature": 85.05087649949306,
+      "n_steps": 130
+    },
+    {
+      "trajectory_idx": 32,
+      "correlation": -0.6216268758427543,
+      "mean_step_size": 0.007239130434782609,
+      "mean_curvature": 95.2928381429924,
+      "n_steps": 138
+    },
+    {
+      "trajectory_idx": 38,
+      "correlation": -0.528486897068272,
+      "mean_step_size": 0.00762595419847328,
+      "mean_curvature": 88.51910377954773,
+      "n_steps": 131
+    },
+    {
+      "trajectory_idx": 43,
+      "correlation": -0.6281059097026698,
+      "mean_step_size": 0.007291970802919706,
+      "mean_curvature": 92.84861074858475,
+      "n_steps": 137
+    },
+    {
+      "trajectory_idx": 49,
+      "correlation": -0.584987920071039,
+      "mean_step_size": 0.007625954198473283,
+      "mean_curvature": 87.82813180991317,
+      "n_steps": 131
+    }
+  ]
+}

@@ -117,10 +117,32 @@ jacobian_eda/results/
 }
 ```
 
-#### **Key Finding**: 28.4% of time intervals are straightenable
+#### **Key Finding**: 58.6% of time intervals are straightenable
 - Regions with low integral of spectral norm
 - Safe to merge Euler steps without significant error
 - Green regions in visualization mask
+
+#### **Main Visualization**
+
+![Jacobian EDA Analysis](jacobian_eda/results/jacobian_eda_analysis.png)
+
+**Figure 1.1**: Jacobian EDA 4-panel visualization showing:
+- **Top-left**: Mean geodesic deviation integral (darker = more straightenable)
+- **Top-right**: Standard deviation of integrals (shows variability)
+- **Bottom-left**: Straightenability mask with threshold ε=0.2 (green = straightenable)
+- **Bottom-right**: Summary statistics and interpretation guide
+
+#### **Enhanced Lower Triangle with KDE Bounds**
+
+![Jacobian EDA Lower Triangle KDE](jacobian_eda/results/jacobian_eda_lower_triangle_kde.png)
+
+**Figure 1.2**: Enhanced lower triangle visualization with KDE contour bounds:
+- **Left panel**: Geodesic deviation with colored contour lines for different ε thresholds
+  - ε = 0.05, 0.1, 0.15, 0.2, 0.3, 0.4 (increasingly permissive thresholds)
+  - Shows "safe zones" where curvature is below each threshold
+- **Right panel**: Straightenability mask (lower triangle only)
+  - Red = not straightenable (needs small steps)
+  - Green = straightenable (can use large steps)
 
 ---
 
@@ -265,6 +287,39 @@ eps_linear_eda/results/
 | **Mean tightness ratio** | ~57× | RHS is typically 50-100× larger than LHS |
 | **Violations** | 35/2500 (1.4%) | Rare cases where LHS > RHS |
 | **Theorem 3.1 status** | FAIL | Due to violations (see next section) |
+
+#### **Supporting 1D Analysis Graphs**
+
+![EPS Linear Supporting Analysis](eps_linear_eda/results/eps_linear_supporting_analysis.png)
+
+**Figure 2.1**: Three supporting analysis graphs showing:
+- **Left panel**: Average curvature ε(t) vs time
+  - Shows how trajectory "wiggliness" varies over time
+  - Helps identify high-curvature regions
+- **Middle panel**: Average Lipschitz constant L(t) vs time
+  - Shows velocity field sensitivity at different times
+  - Higher L means harder to approximate with large steps
+- **Right panel**: Average RHS bound vs window size H
+  - Shows how error bounds grow with interval length
+  - Helps determine safe step sizes
+
+#### **Triple Heatmap Visualization**
+
+![EPS Linear Triple Heatmap](eps_linear_eda/results/eps_linear_eda_analysis.png)
+
+**Figure 2.2**: EPS Linear EDA 4-panel triple heatmap showing:
+- **Top-left (LHS)**: Actual measured error ||x̂^N - x̂^1|| (log scale)
+  - Darker = smaller error, lighter = larger error
+  - Shows where step compression works well vs poorly
+- **Top-right (RHS)**: Theoretical bound from Theorem 3.1 (log scale)
+  - Shows the theoretical error upper bound
+  - Mostly much larger than LHS (conservative bound)
+- **Bottom-left (Ratio)**: Tightness ratio RHS/LHS (log scale)
+  - Green = tight bound (theory matches practice)
+  - Red = conservative bound (proof may be pessimistic)
+- **Bottom-right (Violations)**: Violation scatter plot
+  - Red X marks: Cells where LHS > RHS (bound violations)
+  - 35 violations total (1.4% of grid)
 
 ---
 

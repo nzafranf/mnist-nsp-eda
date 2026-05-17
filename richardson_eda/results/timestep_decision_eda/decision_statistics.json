@@ -1,0 +1,71 @@
+{
+  "config": {
+    "tolerance": 0.01,
+    "alpha": 0.75,
+    "f_min": 0.1,
+    "f_max": 5.0
+  },
+  "trajectories": [
+    {
+      "trajectory_id": 0,
+      "n_steps": 19,
+      "n_rejected": 2,
+      "rejection_rate": 0.09523809523809523,
+      "acceptance_rate": 0.9047619047619048,
+      "error_mean": 0.014513455904393811,
+      "error_std": 0.04210873726895822,
+      "error_min": 0.00020068771846126765,
+      "error_max": 0.20257046818733215,
+      "error_median": 0.005420499015599489,
+      "H_factor_mean": 1.3643106590916685,
+      "H_factor_std": 1.2010420042691898,
+      "accepted_steps": 19,
+      "rejected_steps": 2
+    },
+    {
+      "trajectory_id": 1,
+      "n_steps": 20,
+      "n_rejected": 1,
+      "rejection_rate": 0.047619047619047616,
+      "acceptance_rate": 0.9523809523809523,
+      "error_mean": 0.005786266377461808,
+      "error_std": 0.003915283109616705,
+      "error_min": 0.0001302764139836654,
+      "error_max": 0.02107546664774418,
+      "error_median": 0.005552117712795734,
+      "H_factor_mean": 1.38169325293723,
+      "H_factor_std": 1.184438576427353,
+      "accepted_steps": 20,
+      "rejected_steps": 1
+    },
+    {
+      "trajectory_id": 2,
+      "n_steps": 23,
+      "n_rejected": 2,
+      "rejection_rate": 0.08,
+      "acceptance_rate": 0.92,
+      "error_mean": 0.006358049028785899,
+      "error_std": 0.0053997498714083375,
+      "error_min": 0.00030714835156686604,
+      "error_max": 0.030169928446412086,
+      "error_median": 0.005546628963202238,
+      "H_factor_mean": 1.1779167761719747,
+      "H_factor_std": 0.7010890218620159,
+      "accepted_steps": 23,
+      "rejected_steps": 2
+    }
+  ],
+  "aggregate": {
+    "total_trajectories": 3,
+    "total_iterations": 67,
+    "error_mean": 0.008735005875203216,
+    "error_std": 0.024222832518676938,
+    "error_median": 0.005499129183590412,
+    "error_q25": 0.004804172553122044,
+    "error_q75": 0.006077810423448682,
+    "H_factor_mean": 1.3002089784612871,
+    "H_factor_std": 1.0412469729299265,
+    "H_factor_min": 0.16663767497903695,
+    "H_factor_max": 5.0
+  }
+}
